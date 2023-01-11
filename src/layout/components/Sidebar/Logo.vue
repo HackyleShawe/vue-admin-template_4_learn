@@ -1,10 +1,16 @@
+<!--
+  右侧导航栏的具体项LOGO图标
+-->
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
+    <!--过度动画-->
     <transition name="sidebarLogoFade">
+      <!--router-link静态路由占位符：里面要放置具体的路由地址-->
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
         <h1 v-else class="sidebar-title">{{ title }} </h1>
       </router-link>
+
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
         <h1 class="sidebar-title">{{ title }} </h1>

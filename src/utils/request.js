@@ -3,14 +3,14 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// create an axios instance
+// create an axios instance, and config some init parameters
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
 
-// request interceptor
+// request interceptor：从Cookie中获取token，放在请求头里
 service.interceptors.request.use(
   config => {
     // do something before request is sent
@@ -30,7 +30,7 @@ service.interceptors.request.use(
   }
 )
 
-// response interceptor
+// response interceptor：根据后端定义的响应状态码，判断此次请求是否响应成功
 service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status

@@ -1,3 +1,6 @@
+<!--
+  右侧导航栏的具体项为超链接
+-->
 <template>
   <component :is="type" v-bind="linkProps(to)">
     <slot />

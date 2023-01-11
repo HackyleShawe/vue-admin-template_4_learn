@@ -2,6 +2,9 @@ import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
+/**
+ * 已登录用户的数据存储与共享
+ */
 const getDefaultState = () => {
   return {
     token: getToken(),
@@ -10,8 +13,10 @@ const getDefaultState = () => {
   }
 }
 
+// 要全局共享的属性，全局只存在一份
 const state = getDefaultState()
 
+// 提供更改state中的属性的方法
 const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
@@ -27,8 +32,9 @@ const mutations = {
   }
 }
 
+// 一些业务代码（登录、获取用户信息、登出），并且可以提交用于mutation，目的还是为了更改state中的值
 const actions = {
-  // user login
+  // 登录：请求后端接口；成功后将token信息存储Cookie中
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
@@ -43,7 +49,7 @@ const actions = {
     })
   },
 
-  // get user info
+  // 获取用户信息：请求后端接口，获取用户的信息，填充到vuex
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -53,10 +59,13 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
 
+        // 从后端的返回结果中获取用户名称和头像的URL
         const { name, avatar } = data
 
+        // 塞入到vuex
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -64,7 +73,7 @@ const actions = {
     })
   },
 
-  // user logout
+  // 登出：请求后端接口，移除本地Cookie中的Token，清除动态加载的路由，请求vuex中的数据
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {

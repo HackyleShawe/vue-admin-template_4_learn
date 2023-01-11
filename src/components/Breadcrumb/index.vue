@@ -1,3 +1,6 @@
+<!--
+  面包屑，显示路径
+-->
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">

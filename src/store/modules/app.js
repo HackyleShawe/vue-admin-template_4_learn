@@ -1,10 +1,17 @@
 import Cookies from 'js-cookie'
 
+/**
+ * 整个应用程序公用的数据共享
+ */
 const state = {
+  // 左侧导航栏的数据缓存
   sidebar: {
+    // 是否展开
     opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
+    // 是否展示动画
     withoutAnimation: false
   },
+  // 设备类型
   device: 'desktop'
 }
 

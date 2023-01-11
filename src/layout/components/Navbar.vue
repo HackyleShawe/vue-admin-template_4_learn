@@ -1,15 +1,25 @@
+<!--
+  右侧上部分的功能按钮导航
+-->
 <template>
   <div class="navbar">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
+    <!--面包屑-->
     <breadcrumb class="breadcrumb-container" />
 
+    <!--右侧功能菜单-->
     <div class="right-menu">
+
+      <!--头像及下拉框-->
       <el-dropdown class="avatar-container" trigger="click">
+        <!--头像-->
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
+
+        <!--头像下面的下拉框-->
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
             <el-dropdown-item>

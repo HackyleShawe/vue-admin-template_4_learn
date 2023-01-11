@@ -2,6 +2,9 @@ import defaultSettings from '@/settings'
 
 const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
 
+/**
+ * 项目的全局配置项
+ */
 const state = {
   showSettings: showSettings,
   fixedHeader: fixedHeader,
